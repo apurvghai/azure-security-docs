@@ -2,14 +2,14 @@
 title: Planning multicloud security determine multicloud dependencies CSPM CWPP guidance cloud workload protection
 description: Learn about determining multicloud dependencies when planning multicloud deployment with Microsoft Defender for Cloud.
 ms.topic: how-to
-author: dcurwin
-ms.author: dacurwin
+author: Elazark
+ms.author: elkrieger
 ms.date: 04/28/2025
 ---
 
 # Determine multicloud dependencies
 
-This article is one of a series providing guidance as you design a cloud security posture management (CSPM) and cloud workload protection (CWP) solution across multicloud resources with Microsoft Defender for Cloud.
+This article is one of a series providing guidance as you design a cloud security posture management (CSPM) and cloud workload protection platform (CWPP) solution across multicloud resources with Microsoft Defender for Cloud.
 
 ## Goal
 
@@ -31,7 +31,7 @@ Defender for Cloud provides Cloud Security Posture Management (CSPM) features fo
 ## CWPP
 
 > [!NOTE]
-> As the Log Analytics agent is set to retire in August 2024 and as part of the Defender for Cloud [updated strategy](upcoming-changes.md#defender-for-cloud-plan-and-strategy-for-the-log-analytics-agent-deprecation), all **Defender for Servers** features and capabilities will be provided either through Microsoft Defender for Endpoint integration or agentless scanning, without dependency on either the Log Analytics agent (MMA) or Azure Monitor agent (AMA). For more information about this change, see [this announcement](upcoming-changes.md#defender-for-cloud-plan-and-strategy-for-the-log-analytics-agent-deprecation).
+> As the Log Analytics agent retired in August 2024 and as part of the Defender for Cloud [updated strategy](upcoming-changes.md#defender-for-cloud-plan-and-strategy-for-the-log-analytics-agent-deprecation), all **Defender for Servers** features and capabilities will be provided either through Microsoft Defender for Endpoint integration or agentless scanning, without dependency on either the Log Analytics agent (MMA) or Azure Monitor agent (AMA). For more information about this change, see [this announcement](upcoming-changes.md#defender-for-cloud-plan-and-strategy-for-the-log-analytics-agent-deprecation).
 
 In Defender for Cloud, you enable specific plans to get Cloud Workload Platform Protection (CWPP) features. Plans to protect multicloud resources include:
 
@@ -49,7 +49,6 @@ The following table summarizes extension requirements for CWPP.
 |Microsoft Defender for Endpoint extension |✔|||
 |Vulnerability assessment| ✔| ||
 |Agentless Disk Scanning| ✔ | ✔ ||
-|Log Analytics or Azure Monitor Agent (preview) extension|✔| |✔|
 |Defender sensor| | ✔| |
 |Azure Policy for Kubernetes | | ✔| |
 |Kubernetes audit log data | | ✔| |
@@ -84,7 +83,6 @@ The following components and requirements are needed to receive full protection 
   To autoprovision the Azure Arc agent, the OS configuration agent on [GCP VM instances](./quickstart-onboard-gcp.md?pivots=env-settings) and the AWS Systems Manager (SSM) agent for [AWS EC2 instances](./quickstart-onboard-aws.md?pivots=env-settings) must be configured. [Learn more](/azure/azure-arc/servers/agent-overview) about the agent.
 - **Defender for Endpoint capabilities**: The [Microsoft Defender for Endpoint](./integration-defender-for-endpoint.md?tabs=linux) agent provides comprehensive endpoint detection and response (EDR) capabilities.
 - **Vulnerability assessment**: Using either the integrated [Qualys vulnerability scanner](./deploy-vulnerability-assessment-vm.md), or the [Microsoft Defender Vulnerability Management](/microsoft-365/security/defender-vulnerability-management/defender-vulnerability-management) solution.
-- **Log Analytics agent/[Azure Monitor Agent](/azure/azure-monitor/agents/agents-overview) (AMA) (in preview)**: Collects security-related configuration information and event logs from machines.
 
 #### Check networking requirements
 

@@ -7,6 +7,7 @@ ms.service: azure-confidential-ledger
 ms.topic: how-to
 ms.date: 04/14/2025
 ms.author: mbaldwin
+ms.custom: sfi-image-nochange
 #Customer intent: As developer, I want to know how to register my Azure confidential ledger application with the Microsoft identity platform so that the security token service can issue ID and/or access tokens to client applications that request them.
 ---
 
@@ -18,7 +19,7 @@ The Microsoft identity platform performs identity and access management (IAM) on
 
 ## Prerequisites
 
-- An Azure account with an active subscription and permission to manage applications in Microsoft Entra ID. [Create an account for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with an active subscription and permission to manage applications in Microsoft Entra ID. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - A Microsoft Entra tenant. [Learn how to set up a tenant](/azure/active-directory/develop/quickstart-create-new-tenant).
 - An application that calls Azure confidential ledger.
 

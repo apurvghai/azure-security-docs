@@ -4,7 +4,7 @@ description: Learn how to enable Microsoft Defender for Endpoint integration in 
 author: elazark
 ms.author: elkrieger
 ms.topic: how-to
-ms.date: 05/01/2025
+ms.date: 06/30/2025
 #customer intent: As a user, I want to learn how to manually enable the Defender for Endpoint integration in Defender for Cloud so that I can protect multicloud and on-premises machines.
 ---
 
@@ -44,6 +44,9 @@ Defender for Endpoint integration is enabled by default when you enable a Defend
 
     Onboarding might take up to an hour. Defender for Cloud detects any previous Defender for Endpoint installations and reconfigures them to integrate with Defender for Cloud.
 
+> [!NOTE]
+> For Azure VMs created from generalized OS images, MDE will not be automatically provisioned via this setting; however, you can manually enable the MDE agent and extension using Azure CLI, REST API, or Azure Policy.
+
 ### Verify installation on Linux machines
 
 Verify Defender for Endpoint sensor installation on a Linux machine by following these steps:
@@ -72,11 +75,11 @@ If Defender for Servers is enabled and Defender for Endpoint integration is on i
 
 1. Select **Fix** to see the components that aren't enabled.
 
-    :::image type="content" source="./media/integration-defender-for-endpoint/fix-defender-for-endpoint.png" alt-text="Screenshot of Fix button that enables Microsoft Defender for Endpoint support.":::
+    :::image type="content" source="./media/integration-defender-for-endpoint/fix-defender-for-endpoint.png" alt-text="Screenshot of Fix button that enables Microsoft Defender for Endpoint support." lightbox="media/integration-defender-for-endpoint/fix-defender-for-endpoint.png":::
 
 1. In **Missing components** > **Unified solution**, select **Enable** to automatically install the Defender for Endpoint agent on Windows Server 2012 R2 and 2016 machines connected to Microsoft Defender for Cloud.
 
-    :::image type="content" source="./media/integration-defender-for-endpoint/enable-defender-for-endpoint-unified.png" alt-text="Screenshot of enabling the use of the Defender for Endpoint unified solution for Windows Server 2012 R2 and 2016 machines.":::
+    :::image type="content" source="./media/integration-defender-for-endpoint/enable-defender-for-endpoint-unified-small.png" alt-text="Screenshot of enabling the use of the Defender for Endpoint unified solution for Windows Server 2012 R2 and 2016 machines." lightbox="./media/integration-defender-for-endpoint/enable-defender-for-endpoint-unified.png":::
 
 1. To save the changes, select **Save** at the top of the page. In the **Settings and monitoring** page, select **Continue**.
 
@@ -103,7 +106,7 @@ If Defender for Servers is already enabled and Defender for Endpoint integration
 
 1. In **Missing components** > **Linux machines**, select **Enable**.
 
-    :::image type="content" source="./media/integration-defender-for-endpoint/enable-defender-for-endpoint-linux.png" alt-text="Screenshot of enabling the integration between Defender for Cloud and Microsoft's EDR solution, Microsoft Defender for Endpoint for Linux.":::
+    :::image type="content" source="./media/integration-defender-for-endpoint/enable-defender-for-endpoint-linux-small.png" alt-text="Screenshot of enabling the integration between Defender for Cloud and Microsoft's EDR solution, Microsoft Defender for Endpoint for Linux." lightbox="./media/integration-defender-for-endpoint/enable-defender-for-endpoint-linux.png":::
 
 1. To save the changes, select **Save** at the top of the page. In the **Settings and monitoring** page, select **Continue**.
 
@@ -164,6 +167,11 @@ URI: `https://management.azure.com/subscriptions/<subscriptionId>/providers/Micr
 }
 ```
 
+> [!NOTE]
+> Both the Defender for Endpoint Unified Solution and Defender for Endpoint for Linux are automatically included on new subscriptions when you enable the Defender for Endpoint integration using `microsoft.security/settings/WDATP`.
+>
+> The settings `WDATP_UNIFIED_SOLUTION` and `WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW` are relevant for legacy subscriptions. These settings apply to subscriptions that already have the Defender for Endpoint integration enabled when these features were introduced in August 2021 and Spring 2022.
+
 ## Track Defender for Endpoint deployment status
 
 You can use the [Defender for Endpoint deployment status workbook](https://github.com/Azure/Microsoft-Defender-for-Cloud/tree/main/Workbooks/Defender%20for%20Servers%20Deployment%20Status) to track the Defender for Endpoint deployment status on your Azure VMs and Azure Arc-enabled VMs. The interactive workbook provides an overview of machines in your environment showing their Microsoft Defender for Endpoint extension deployment status.
@@ -193,3 +201,22 @@ To remove the Defender for Endpoint solution from your machines:
 1. Select **Continue** and **Save** to save your settings.
 1. Remove the `MDE.Windows` or `MDE.Linux` extension from the machine.
 1. [Offboard the device from the Microsoft Defender for Endpoint service](/defender-endpoint/offboard-machines).
+
+### Remove Defender for Endpoint integration tags
+
+When a **Windows** device is onboarded through Defender for Cloud, Defender for Endpoint creates registry values related to Defender for Cloud. These registry tags remain on the device after offboarding and don’t affect functionality. 
+
+To remove these tags completely, follow these steps. On Linux, the system stores this information internally and doesn't show it in the registry.
+
+1. Select **Start**, type **regedit**, and press **Enter** to open **Registry Editor**. 
+1. In the left pane, go to: 
+
+    `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Advanced Threat Protection\DeviceTags`
+    
+1. Delete these value names if they exist:
+    - `AzureResourceId`
+    - `SecurityWorkspaceId`
+    - `SecurityAgentId`
+
+> [!IMPORTANT]
+> Editing the registry incorrectly might cause issues on your device. 

@@ -20,14 +20,14 @@ By connecting your GitLab groups to Defender for Cloud, you extend the security 
 
 To complete this quickstart, you need:
 
-- An Azure account with Defender for Cloud onboarded. If you don't already have an Azure account, [create one for free](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+- An Azure account with Defender for Cloud onboarded. If you don't already have an Azure account, [create one for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 - GitLab Ultimate license for your GitLab Group.
 
 ## Availability
 
 | Aspect | Details |
 |--|--|
-| Release state: | Preview. The [Azure Preview Supplemental Terms](https://azure.microsoft.com/support/legal/preview-supplemental-terms/) include legal terms that apply to Azure features that are in beta, in preview, or otherwise not yet released into general availability. |
+| Release state: | General availability. |
 | Pricing: | For pricing, see the Defender for Cloud [pricing page](https://azure.microsoft.com/pricing/details/defender-for-cloud/?v=17.23h#pricing). You can also [estimate costs with the Defender for Cloud cost calculator](cost-calculator.md).|
 | Required permissions: | **Account Administrator** with permissions to sign in to the Azure portal. <br> **Contributor** to create a connector on the Azure subscription. <br> **Group Owner** on the GitLab Group.|
 | Regions and availability: | Refer to the [support and prerequisites](devops-support.md) section for region support and feature availability.|

@@ -6,14 +6,14 @@ author: msmbaldwin
 ms.service: azure-key-vault
 ms.subservice: managed-hsm
 ms.topic: tutorial
-ms.date: 04/14/2025
+ms.date: 06/19/2025
 
 ms.author: nkondamudi
 ms.custom: references_regions
 ---
 # Enable multi-region replication on Azure Managed HSM
 
-Multi-region replication allows you to extend a managed HSM pool from one Azure region (called the primary region) to another Azure region (called an extended region). Once configured, both regions are active, able to serve requests and, with automated replication, share the same key material, roles, and permissions. The closest available region to the application receives and fulfills the request, maximizing read throughput and latency. While regional outages are rare, multi-region replication enhances the availability of mission critical cryptographic keys should one region become unavailable. For more information on SLA, visit [SLA for Azure Key Vault Managed HSM](https://azure.microsoft.com/support/legal/sla/key-vault-managed-hsm/v1_0/).
+Multi-region replication allows you to extend a managed HSM pool from one Azure region (called the primary region) to another Azure region (called an extended region). Once configured, both regions are active, able to serve requests and, with automated replication, share the same key material, roles, and permissions. The closest available region to the application receives and fulfills the request, maximizing read throughput and latency. While regional outages are rare, multi-region replication enhances the availability of mission critical cryptographic keys should one region become unavailable. When multi-region replication is enabled, the SLA for the primary and extension pools combined increases to 99.99. For more information on SLA, visit [SLA for Azure Key Vault Managed HSM](https://azure.microsoft.com/support/legal/sla/key-vault-managed-hsm/v1_0/).
 
 ## Architecture
 
@@ -32,12 +32,12 @@ Failover occurs when one of the regions in a multi-region Managed HSM becomes un
 | Affected Region | Reads Allowed | Writes Allowed |
 |--|--|--|
 | Extended Region | Yes | Yes |
-| Primary Region | Yes | Maybe |
+| Primary Region | Yes | Yes |
 
-If an extended region becomes unavailable, read operations (get key, list keys, all crypto operations, list role assignments) are available if the primary region is alive. Write operations (create and update keys, create and update role assignments, create and update role definitions) are also available.
-
-If the primary region is unavailable, read operations are available, but write operations may not, depending on the scope of the outage.
-
+If a primary or extended region goes down, you can still perform both read and write operations.
+- **Read operations**: get key, list keys, run cryptographic operations, and list role assignments.
+- **Write operations**: create or update keys, role assignments, and role definitions.
+ 
 ## Time to failover
 
 Under the hood, DNS resolution handles the redirection of requests to either the primary or the extended regions.
@@ -51,7 +51,7 @@ If a region reports an unhealthy status to the Traffic Manager, future requests 
 All Azure Managed HSM regions are supported as primary regions (regions where you can replicate a Managed HSM pool from).
 
 > [!NOTE]
-> US East, US South Central, West US 2, Switzerland North, West Europe, Central India, Canada Central, Canada East, Japan West, Qatar Central, Poland Central, and US West Central cannot be extended regions at this time. Other regions may be unavailable for extension due to capacity limitations in the region.
+> US East, West Europe, Canada East, Qatar Central, Poland Central, and West India cannot be extended regions at this time. Other regions may be unavailable for extension due to capacity limitations in the region.
 
 ## Billing
 

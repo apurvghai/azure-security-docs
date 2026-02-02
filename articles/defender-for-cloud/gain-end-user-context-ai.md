@@ -34,6 +34,9 @@ For application context, pass the `applicationName` field, as a simple string.
 
 If a field’s name is misspelled, the Azure OpenAI API call will still result in success. 
 
+> [!NOTE]
+> The EndUserId is the Microsoft Entra ID (formerly Azure Active Directory) user object ID used to authenticate end-users within the generative AI application. Sensitive personal information should not be included in this field.
+
 ## UserSecurityContext schema
 
 The exact schema can be found in Azure OpenAI [REST API reference documentation](/azure/ai-services/openai/reference-preview). 
@@ -49,7 +52,7 @@ This feature is currently not supported when applying models deployed through th
 |----|----| ----| ----|
 |Azure OpenAI REST API|[2025-01-01 version](/azure/ai-services/openai/reference-preview)|-|-|
 |Azure .NET SDK| [v2.2.0-beta.1 (2025-02-07) or higher](https://github.com/Azure/azure-sdk-for-net/blob/Azure.AI.OpenAI_2.2.0-beta.1/sdk/openai/Azure.AI.OpenAI/CHANGELOG.md)|[GitHub code example](https://github.com/Azure-Samples/signalr-ai-streaming/blob/main/src/AIStreaming/MsDefenderExtension.cs)|-|
-|Azure Python SDK|[v1.61.1 or higher](https://github.com/openai/openai-python/releases/tag/v1.61.1)|-|The support is provided by appending to "extra_body" object|
+|Azure Python SDK|[v1.61.1 or higher](https://github.com/openai/openai-python/releases/tag/v1.61.1)|[GitHub code example](https://github.com/microsoft/sample-app-aoai-chatGPT/blob/main/backend/security/ms_defender_utils.py)|The support is provided by appending to "extra_body" object|
 |Azure JS/Node SDK|[v4.83.0 or higher](https://github.com/openai/openai-node/releases/tag/v4.83.0)|[GitHub code example](https://github.com/Azure-Samples/openai-secure-ui-js/blob/main/packages/api/src/functions/security/ms-defender-utils.ts)|The support is provided by appending to "extra_body" object|
 |Azure Go SDK|[v0.7.2 or higher ](https://pkg.go.dev/github.com/Azure/azure-sdk-for-go/sdk/ai/azopenai@v0.7.2#UserSecurityContext)|-|-|
 

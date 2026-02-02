@@ -7,7 +7,7 @@ services: key-vault
 ms.subservice: general
 ms.topic: conceptual
 ms.service: azure-key-vault
-ms.date: 05/08/2025
+ms.date: 11/19/2025
 ---
 
 # How to migrate key workloads
@@ -31,7 +31,7 @@ Below we discuss several methods for migrating workloads to use a new key, eithe
 For most workloads that use keys in Key Vault, the most effective way to migrate a key into a new location (a new managed HSM or new key vault in a different subscription or region) is to:
 
 1. Create a new key in the new vault or managed HSM.
-2. Grant your workload access to the new key by assigning the workload's managed identity to the appropriate RBAC role in [Azure Key Vault](rbac-guide.md) or [Azure Managed HSM](../managed-hsm/access-control.md).
+2. Grant your workload access to the new key by assigning the workload's managed identity to the appropriate Azure RBAC role in [Azure Key Vault](rbac-guide.md) or the appropriate Managed HSM local RBAC role in [Azure Managed HSM](../managed-hsm/access-control.md).
 1. Update the workload to use the new key as the customer managed encryption key.
 1. Retain the old key until you no longer want the backups of the workload data that they key originally protected.
 
@@ -71,7 +71,7 @@ It is not safe to delete the old tenant key until you no longer need the content
 
 ## Transitioning to HSM Platform 2
 
-Azure Key Vault has updated its HSM platform to provide improved security with FIPS 140 Level 3 validation. All new keys and key versions are now created using HSM Platform 2 (except UK geo). You can check which HSM platform is protecting your key by looking at its [hsmPlatform](../keys/about-keys-details.md#key-attributes) attribute.
+Azure Key Vault has updated its HSM platform to provide improved security with FIPS 140 Level 3 validation. All new keys and key versions are now created using HSM Platform 2. You can check which HSM platform is protecting your key by looking at its [hsmPlatform](../keys/about-keys-details.md#key-attributes) attribute.
 
 To transition your workloads to keys protected by HSM Platform 2:
 
@@ -89,6 +89,24 @@ To transition your workloads to keys protected by HSM Platform 2:
      - Follow the [Custom applications guidance](#custom-applications-and-client-side-encryption) to ensure a smooth transition.
 
 The benefits of transitioning to HSM Platform 2 include enhanced security compliance with FIPS 140 Level 3 validation. Since all new keys are automatically created on the latest platform, this transition mainly applies to updating existing workloads to use newer key versions.
+
+## Managing Customer Keys for Microsoft 365
+
+For organizations transitioning from HSM Platform 1, managing customer keys effectively is critical. Microsoft 365 provides robust tools and guidance for rolling or rotating customer-managed root keys and availability keys. Below are key resources to help you manage this process:
+
+- [Roll or rotate a Customer Key or an availability key](/purview/customer-key-availability-key-roll): Learn how to roll customer-managed root keys or availability keys, including creating new versions or generating new keys.
+- [Understand the availability key](/purview/customer-key-availability-key-understand): Detailed information about the availability key and its role in Microsoft 365 encryption.
+- [Manage Customer Key for Microsoft 365](/purview/customer-key-manage): Comprehensive guidance on managing customer keys, including creating and assigning data encryption policies (DEPs).
+
+### Key Considerations for HSM Platform 1 Retirement
+
+As HSM Platform 1 is retired, ensure that you:
+
+1. Roll or rotate your customer-managed root keys as needed to maintain compliance and security.
+2. Update data encryption policies (DEPs) to reference new keys or key versions.
+3. Follow best practices for key management, including minimizing permissions and monitoring key usage.
+
+For more details, refer to the [Microsoft Purview Customer Key documentation](/purview/customer-key-overview).
 
 ## Next steps
 

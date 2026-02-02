@@ -1,10 +1,11 @@
 ---
 title: Suppressing false positives or other unwanted security alerts
 description: This article explains how to use Microsoft Defender for Cloud's suppression rules to hide unwanted security alerts, such as false positives.
-ms.date: 03/11/2024
+ms.date: 08/20/2025
 ms.topic: how-to
-ms.author: dacurwin
-author: dcurwin
+ms.author: elkrieger
+author: Elazark
+ms.custom: sfi-image-nochange
 ---
 # Suppress alerts from Microsoft Defender for Cloud
 
@@ -12,11 +13,11 @@ This page explains how you can use alerts suppression rules to suppress false po
 
 ## Availability
 
-|Aspect|Details|
-|----|:----|
-|Release state:|General availability (GA)|
-|Required roles and permissions:|**Security admin** and **Owner** can create/delete rules.<br>**Security reader** and **Reader** can view rules.|
-|Clouds:|:::image type="icon" source="./media/icons/yes-icon.png"::: Commercial clouds<br>:::image type="icon" source="./media/icons/yes-icon.png"::: National (Azure Government, Microsoft Azure operated by 21Vianet)|
+Required roles and permissions:
+- **Security admin** and **Owner** can create/delete rules.
+- **Security reader** and **Reader** can view rules.
+
+For cloud availability, see the [Defender for Cloud support matrices for Azure commercial/other clouds](support-matrix-defender-for-cloud.md).
 
 ## What are suppression rules?
 
@@ -61,11 +62,11 @@ You can also select the **Suppression rules** button in the Security Alerts page
 :::image type="content" source="media/alerts-suppression-rules/create-new-suppression-rule.png" alt-text="Screenshot of the Create suppression rule button in the Suppression rules page.":::
 
 > [!NOTE]
-> For some alerts, suppression rules are not applicable for certain entities. If the rule is not available, a message will display at the end of the **Create a suppression rule** process.
+> For some alerts, suppression rules aren't applicable for certain entities. If the rule isn't available, a message displays at the end of the **Create a suppression rule** process.
 
 ## Edit a suppression rule
 
-To edit a rule you've created from the suppression rules page:
+To edit a rule, you've created from the suppression rules page:
 
 1. From Defender for Cloud's security alerts page, select **Suppression rules** at the top of the page.
 
